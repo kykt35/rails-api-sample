@@ -11,7 +11,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.6.1'
 
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['~/.ssh/kp_for_photobu.pem']
+                  keys: ['~/.ssh/sakura_one_native_rsa']
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
@@ -23,6 +23,7 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
+set :pty, true
 
 
 

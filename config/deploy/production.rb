@@ -1,4 +1,4 @@
-server '133.242.22.98', user: 'kato', roles: %w{app db web}
+server '133.242.22.98', user: 'kato', roles: %w{app db web}, port: 29451
 
 set :rails_env, "production"
 set :unicorn_rack_env, "production"
