@@ -1,6 +1,6 @@
 module Api
-  module Auth
-    class RegistrationsController < DeviseTokenAuth::RegistrationsController
+  module  V1
+    class Auth::RegistrationsController < DeviseTokenAuth::RegistrationsController
  
       private
       # :company( 企業名 )を追加できるようにpravateメソッドに修正を加える
