@@ -1,7 +1,14 @@
-server '133.242.22.98', user: 'kato', roles: %w{app db web}, port: 29451
 
-set :rails_env, "production"
-set :unicorn_rack_env, "production"
+server '133.242.23.165', user: "deploy", roles: %w{app db web}, port: 5395
+
+set :ssh_options, {
+  keys: %w(~/.ssh/rails-api-sample-sakura),
+  forward_agent: true,
+  auth_methods: %w(publickey)
+}
+
+# set :rails_env, "production"
+# set :unicorn_rack_env, "production"
 
 
 # server-based syntax
