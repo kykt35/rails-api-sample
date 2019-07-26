@@ -2,28 +2,20 @@
 lock '3.11.0'
 
 set :application, 'rails-api-sample'
-set :repo_url,  'git@bitbucket.org:kiyotada/rails-api-sample.git'
+set :repo_url,  'git@github.com:kykt35/rails-api-sample.git'
 
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_files, %w{config/master.key}
+
+set :rbenv_type, :user
+set :rbenv_ruby, '2.6.1'
+
+set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
+set :keep_releases, 5
+
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-  desc "Make sure local git is in sync with remote."
-  task :confirm do
-    on roles(:app) do
-      puts "This stage is '#{fetch(:stage)}'. Deploying branch is '#{fetch(:branch)}'."
-      puts 'Are you sure? [y/n]'
-      ask :answer, 'n'
-      if fetch(:answer) != 'y'
-        puts 'deploy stopped'
-        exit
-      end
-    end
+  task :restart do
+    invoke 'unicorn:restart'
   end
-
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      invoke 'deploy'
-    end
-  end
-
-  before :starting, :confirm
 end

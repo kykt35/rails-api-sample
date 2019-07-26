@@ -1,12 +1,10 @@
 
-server '133.242.23.165', user: "deploy", roles: %w{app db web}, port: 5395
+server '133.242.23.165', user: "sakura", roles: %w{app db web}, port: 5395
 
-set :ssh_options, {
+set :ssh_options, auth_methods: %w(publickey), 
   keys: %w(~/.ssh/rails-api-sample-sakura),
-  forward_agent: true,
-  auth_methods: %w(publickey)
-}
-
+  forward_agent: true
+  
 # set :rails_env, "production"
 # set :unicorn_rack_env, "production"
 
